@@ -34,7 +34,7 @@
 
   **The event loop monitors the Call Stack and the Callback queue. If we execute ```console.log('Hi)```  then that code is put on     the call stack.**
 
-  **If we use the setTimeout(callback) function JavaScript will make a call to the Web API's with the callback. The setTimeout  function will then be removed from the callstack so we are free to execute code. After the x time specified by setTimeout() the callback of setTimeout() is pushed to the Callback Queue. The eventloop then pushes the callback from the queue to the call stack**
+  **If we use the setTimeout(callback) function JavaScript will make a call to the Web API's with the callback. The ```setTimeout```  function will then be removed from the callstack so we are free to execute code. After the x time specified by ```setTimeout()``` the callback of ```setTimeout()``` is pushed to the Callback Queue. The eventloop then pushes the callback from the queue to the call stack**
 
   **The callback is then executed and the code is added onto the call stack, which then executes as well. When it is done executing it is removed from the call stack.**
 
@@ -46,5 +46,10 @@
 
 
 * Explain the terms JavaScript Engine (name at least one) and JavaScript Runtime Environment (name at least two)
-
+  **A JavaScript engine is a computer program that executes JavaScript (JS) code. The first JavaScript engines were mere interpreters, but all relevant modern engines utilize just-in-time compilation for improved performance which means that it can compile code at run time. The most used engine is V8 made by Google**
+  
 * Explain (some) of the purposes with the tools Babel and WebPack and how they differ from each other. Use examples from the exercises.
+  **Babel is used to transtale ES6+ code into ES5. Babel is sometimes called a transpiler. This is very useful because we can have the rich language features used in the newest JavaScript, even if node or the browser doesn't support it yet.**
+  
+  **Webpack is really useful with frontend projects because they usually contain a lot of assets. Webpack helps us maintain these assets by bundling them. It is able to do this, **
+
