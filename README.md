@@ -29,13 +29,22 @@
   **Node.js is a run time built in C++. Because it is built in C++ it is able to execute tasks in asynchrously as well as run on a computer, which means it can run on a server and work with the underlying operating sytem.**
   
   **NPM is the package manager for node(like, pip, maven and nuget). It has a bunch of modules and toolsets to create different types of applications.**
-* Explain about the Event Loop in JavaScript, including terms like; blocking, non-blocking, event loop, callback queue and "other" API's. Make sure to include why this is relevant for us as developers.
+  
+* Explain about the Event Loop in JavaScript, including terms like blocking, non-blocking, event loop, callback queue and other API's. Make sure to include why this is relevant for us as developers.
 
-**The event loop monitors the Call Stack and the Callback queue. **
+  **The event loop monitors the Call Stack and the Callback queue. If we execute ```console.log('Hi)```  then that code is put on     the call stack.**
+
+  **If we use the setTimeout(callback) function JavaScript will make a call to the Web API's with the callback. The setTimeout  function will then be removed from the callstack so we are free to execute code. After the x time specified by setTimeout() the callback of setTimeout() is pushed to the Callback Queue. The eventloop then pushes the callback from the queue to the call stack**
+
+  **The callback is then executed and the code is added onto the call stack, which then executes as well. When it is done executing it is removed from the call stack.**
 
 
 
 * What does it mean if a method in nodes API's ends with xxxxxxSync?
 
+  **It means that it is blocking. Code will only be run after the Sync function is finished.**
+
+
 * Explain the terms JavaScript Engine (name at least one) and JavaScript Runtime Environment (name at least two)
+
 * Explain (some) of the purposes with the tools Babel and WebPack and how they differ from each other. Use examples from the exercises.
