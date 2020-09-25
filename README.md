@@ -49,7 +49,8 @@
   **A JavaScript engine is a computer program that executes JavaScript (JS) code. The first JavaScript engines were mere interpreters, but all relevant modern engines utilize just-in-time compilation for improved performance which means that it can compile code at run time. The most used engine is V8 made by Google**
   
 * Explain (some) of the purposes with the tools Babel and WebPack and how they differ from each other. Use examples from the exercises.
+
   **Babel is used to transtale ES6+ code into ES5. Babel is sometimes called a transpiler. This is very useful because we can have the rich language features used in the newest JavaScript, even if node or the browser doesn't support it yet.**
   
-  **Webpack is really useful with frontend projects because they usually contain a lot of assets. Webpack helps us maintain these assets by bundling them. It is able to do this, **
+  **Webpack is really useful with frontend projects because they usually contain a lot of assets. Webpack helps us maintain these assets by bundling them.**
 
