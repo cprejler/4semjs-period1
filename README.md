@@ -166,11 +166,34 @@
   ```
   
   - Provide examples and explain the es2015 features: let, arrow functions, this, rest parameters, destructuring objects and arrays,   maps/sets etc.
+ 	- **Arrow Function(Basically syntactic sugar, so we don't have to use the function keyword. Makes the code more clean**
+		```
+		hello = () => {
+  			return "Hello World!";
+		} 
+		```
+	- **s an improved way to handle function parameter, allowing us to more easily handle various input as parameters in a function. The rest parameter syntax allows us to represent an indefinite number of arguments as an array. With the help of a rest parameter a function can be called with any number of arguments, no matter how it was defined.**
+		
+		```
+		function fun(...input){ 
+    			let sum = 0; 
+    			for(let i of input){ 
+        			sum+=i; 
+    			} 
+    			return sum; 
+		} 
+		
+		console.log(fun(1,2)); //3 
+		console.log(fun(1,2,3)); //6 
+		console.log(fun(1,2,3,4,5)); //15 
+		
+		```
+	
   
   
-  - Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6.
+ - Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6.
   
-  - Explain and demonstrate, how to implement event-based code, how to emit events and how to listen for such events
+ - Explain and demonstrate, how to implement event-based code, how to emit events and how to listen for such events
   
   ```
   const EventEmitter = require('events');
