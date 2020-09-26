@@ -24,9 +24,8 @@ var person = {
 
 }
 
+person.setAge(25);
 
 console.log(person.getInfo());
 
-function createPerson(firstName, age){
-	function setName(firstName){
 

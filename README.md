@@ -64,36 +64,36 @@
   
   - this in JavaScript and how it differs from what we know from Java/.net.
   
-  **Java uses class methods we can call on the object**
+    **Java uses class methods we can call on the object**
   
-  **In JavaScript ```this``` refers to the current objects executing context. Every JavaScript function has a reference to it's current execution context**
+    **In JavaScript ```this``` refers to the current objects executing context. Every JavaScript function has a reference to it's current execution context**
   
-  ```
-  var person = {
-	  firstName : "Casper",
-	  lastName : "Prejler",
-	  id : 225512,
-	  fullName : function(){
-		  return this.firstName + " " + this.lastName;
-	  }
-  }
+    ```
+    var person = {
+      firstName : "Casper",
+      lastName : "Prejler",
+      id : 225512,
+      fullName : function(){
+        return this.firstName + " " + this.lastName;
+      }
+    }
 
-  //In this case this belongs to the person object
+    //In this case this belongs to the person object
 
-  console.log(person.fullName())
-
-
-  //We have access to the fullName function on a different object by using the call keyword
-  //
-
-  var person2 = {
-	  firstName : "John",
-	  lastName : "Hansen"
-  }
+    console.log(person.fullName())
 
 
-  console.log(person.fullName.call(person2));
-  ```
+    //We have access to the fullName function on a different object by using the call keyword
+    //
+
+    var person2 = {
+      firstName : "John",
+      lastName : "Hansen"
+    }
+
+
+    console.log(person.fullName.call(person2));
+    ```
 
 
 
@@ -108,25 +108,25 @@
       
       - **it has access to the global variables**
   
-    ```
-    var person = {
-	  firstName : "Casper",
-	  lastName : "Prejler",
-	  age : 26,
-	  setAge : function(age){
-		  this.age = age;},
-	  setName : function(firstName, lastName){
-		  this.firstName = firstName;
-		  this.lastName = lastName;},
-	  getInfo : function(){
-		  return this.firstName + " " + this.age;}
+      ```
+      var person = {
+      firstName : "Casper",
+      lastName : "Prejler",
+      age : 26,
+      setAge : function(age){
+        this.age = age;},
+      setName : function(firstName, lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;},
+      getInfo : function(){
+        return this.firstName + " " + this.age;}
 
-    }
-  
-    person.setAge(25);
+      }
+    
+      person.setAge(25);
 
-    console.log(person.getInfo());
-    ```
+      console.log(person.getInfo());
+      ```
   
   - User-defined Callback Functions (writing functions that take a callback)
   
@@ -145,80 +145,129 @@
       - **The reduce() method reduces the array to a single value by using an accumulator argument**
   
   - Provide examples of user-defined reusable modules implemented in Node.js (learnynode - 6)
-  
-  ```
-  const fs = require('fs');
-  const path = require('path');
+    
+    ```
+    const fs = require('fs');
+    const path = require('path');
 
 
-  module.exports = (dirName, fileExt, callback) => {
-	  fs.readdir(dirName, (err, files) => {
-		  if (err)
-			  return callback(err);
-		  else {
-			  list = files.filter(function(file){
-				  if(path.extname(file) ===  '.' + fileExt) return true;
+    module.exports = (dirName, fileExt, callback) => {
+      fs.readdir(dirName, (err, files) => {
+        if (err)
+          return callback(err);
+        else {
+          list = files.filter(function(file){
+            if(path.extname(file) ===  '.' + fileExt) return true;
 
-		  })
-		  return callback(null, list);
-	  }
-  })}
-  ```
+        })
+        return callback(null, list);
+      }
+    })}
+    ```
   
   - Provide examples and explain the es2015 features: let, arrow functions, this, rest parameters, destructuring objects and arrays,   maps/sets etc.
- 	- **Arrow Function(Basically syntactic sugar, so we don't have to use the function keyword. Makes the code more clean**
-		```
-		hello = () => {
-  			return "Hello World!";
-		} 
-		```
-	- **s an improved way to handle function parameter, allowing us to more easily handle various input as parameters in a function. The rest parameter syntax allows us to represent an indefinite number of arguments as an array. With the help of a rest parameter a function can be called with any number of arguments, no matter how it was defined.**
-		
-		```
-		function fun(...input){ 
-    			let sum = 0; 
-    			for(let i of input){ 
-        			sum+=i; 
-    			} 
-    			return sum; 
-		} 
-		
-		console.log(fun(1,2)); //3 
-		console.log(fun(1,2,3)); //6 
-		console.log(fun(1,2,3,4,5)); //15 
-		
-		```
-	
-  
+
+    - **Arrow Function(Basically syntactic sugar, so we don't have to use the function keyword. Makes the code more clean**
+      ```
+      hello = () => {
+          return "Hello World!";
+      } 
+      ```
+    - **Rest is an improved way to handle function parameter, allowing us to more easily handle various input as parameters in a function. The rest parameter syntax allows us to represent an indefinite number of arguments as an array. With the help of a rest parameter a function can be called with any number of arguments, no matter how it was defined.**
+      
+      ```
+      function fun(...input){ 
+            let sum = 0; 
+            for(let i of input){ 
+                sum+=i; 
+            } 
+            return sum; 
+      } 
+      
+      console.log(fun(1,2)); //3 
+      console.log(fun(1,2,3)); //6 
+      console.log(fun(1,2,3,4,5)); //15 
+      
+      ```
+    - **Object destructuring is an easy way to extract properties of an object**
+
+      ```
+      var hero = {
+        name: 'Batman',
+        realName: 'Bruce Wayne'
+      };
+
+      //Pre ES2015
+      var name     = hero.name;
+      var realName = hero.realName;
+
+      //ES2015
+      const { name, realName } = hero;
+      ```
+    
+    
   
  - Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6.
+
+    ```
+    class Vehicle {
+    
+      constructor (name, type) {
+        this.name = name;
+        this.type = type;
+      }
+    
+      getName () {
+        return this.name;
+      }
+    
+      getType () {
+        return this.type;
+      }
+    
+    }class Car extends Vehicle {
+    
+      constructor (name) {
+        super(name, 'car');
+      }
+    
+      getName () {
+        return 'It is a car: ' + super.getName();
+      }
+    
+    }let car = new Car('Tesla');
+    console.log(car.getName()); // It is a car: Tesla
+    console.log(car.getType()); // car
+    ```
+
+  
   
  - Explain and demonstrate, how to implement event-based code, how to emit events and how to listen for such events
   
-  ```
-  const EventEmitter = require('events');
+    ```
+    const EventEmitter = require('events');
 
-  class DOS_Detector extends EventEmitter {
-     constructor(timeValue){
-       super();  //Figure out what it is you have to extend (use moshes video)
-      this.urls = new Map();
-      this.TIME_BETWEEN_CALLS = timeValue;
+    class DOS_Detector extends EventEmitter {
+      constructor(timeValue){
+        super();  //Figure out what it is you have to extend (use moshes video)
+        this.urls = new Map();
+        this.TIME_BETWEEN_CALLS = timeValue;
+      }
+      addUrl = (url) =>{
+        const time = new Date().getTime();
+        if(this.urls.has(url)){
+          const deltaTime = time - this.urls.get(url) 
+          if(deltaTime < this.TIME_BETWEEN_CALLS){
+            //Add this info to the event {url:url,timeBetweenCalls:deltaTime}
+        this.emit('DosDetected', {url: url, timeBetweenCalls: deltaTime});
+        }
+      }
+      this.urls.set(url,time);
     }
-    addUrl = (url) =>{
-      const time = new Date().getTime();
-      if(this.urls.has(url)){
-         const deltaTime = time - this.urls.get(url) 
-         if(deltaTime < this.TIME_BETWEEN_CALLS){
-          //Add this info to the event {url:url,timeBetweenCalls:deltaTime}
-		  this.emit('DosDetected', {url: url, timeBetweenCalls: deltaTime});
-       }
-     }
-     this.urls.set(url,time);
-   }
-  }
+    }
 
-  module.exports = DOS_Detector;
-  ```
+    module.exports = DOS_Detector;
+    ```
   
   ```
   const DosDetector = require('./dosDetector');
@@ -235,7 +284,212 @@
   
   ```
 
+- Explain the two strategies for improving JavaScript: Babel and ES6 + ES-Next, versus Typescript. What does it require to use these technologies: In our backend with Node and in (many different) Browsers
 
-
+  **It requires we install the packages from npm. We need to set up a proper configuration for it to work properly. Both babel and TypeScript are able to convert ES6 into backwards compatible code by transpiling it.** 
   
-    
+  **TypeScript compiles an entire project at once and Babel transpiles only one file at a time**
+
+  **TypeScript implements type safety, where Babel doesn't care about types at all.** 
+
+  **TypeScript cannot run in the browser directly, we need to compile it and generate a JS file.**
+
+- Provide examples to demonstrate the benefits of using TypeScript, including, types, interfaces, classes and generics
+
+  **Interfaces**
+
+  We are able to establish a blueprint that an object has to follow.
+
+  ```
+  interface MyFunc {
+    (string1: string, string2: string, string3: string): string[];
+  }
+
+  let stringFunction : MyFunc;
+  let stringFunctionUpper : MyFunc;
+  stringFunction = function(string1, string2, string3){
+      let list: string[] = [string1, string2, string3];
+      return list;
+  }
+  ```
+
+  **Classes**
+  ```
+  class Book implements IBook {
+    title : string;
+    readonly author: string;
+    published?: Date;
+    pages: number;
+
+    constructor(t: string, a: string){ }
+
+  }
+  ```
+
+  **Generics**
+
+  Here we can control which type of input and output we want with typesafety.
+  ```
+  function reverseArr<T>(arg: Array<T>): Array<T>{
+    return arg.reverse();
+  }
+
+
+  console.log(reverseArr<string>(["a","b","c"]));
+  console.log(reverseArr<number>([1,2,3]));
+  console.log(reverseArr<boolean>([true,true,false]));
+  ```
+
+### Callbacks, Promises and async/await
+
+
+Explain about (ES-6) promises in JavaScript including, the problems they solve, a quick explanation of the Promise API and:
+
+**Promises are a cleaner way of doing callbacks. We avoid having a huge pyramid of callback arguments**
+
+  - Example(s) that demonstrate how to execute asynchronous (promise-based) code in serial or parallel
+
+    - Serial
+      ```
+      function get(url) {
+        return new Promise(function(resolve, reject) {
+
+          var req = new XMLHttpRequest();
+          req.open('GET', url);
+
+          req.onload = function() {
+            if (req.status == 200) { 
+                resolve(req.response); /* PROMISE RESOLVED */
+            } else { 
+                reject(Error(req.statusText)); /* PROMISE REJECTED */
+            }
+          };
+
+          req.onerror = function() { reject(Error("Network Error")); };
+          req.send();
+        });
+      }
+
+
+      get(url)
+      .then(function(response) {
+          response = JSON.parse(response);
+          var secondURL = response.data.url
+          return get( secondURL ); /* Return another Promise */
+      })
+      .then(function(response) {
+          response = JSON.parse(response);
+          var thirdURL = response.data.url
+          return get( thirdURL ); /* Return another Promise */
+      })
+      .catch(function(err) {
+          handleError(err);
+      });
+      ```
+    - Parralel
+
+      ```
+      var arrayOfURLs = ['one.json', 'two.json', 'three.json', 'four.json'];
+      var arrayOfPromises = arrayOfURLs.map(get);
+
+      Promise.all(arrayOfPromises)
+      .then(function(arrayOfResults) {
+          /* Do something when all Promises are resolved */
+      })
+      .catch(function(err) {
+          /* Handle error is any of Promises fails */
+      })
+
+      ```
+
+
+  - Example(s) that demonstrate how to implement our own promise-solutions.
+    ```
+    const createSecureString = (size) => {
+        return new Promise((resolve, reject) => {
+          crypto.randomBytes(size, (error, buffer) =>{
+            if(error) return reject(error);
+            resolve({
+              length: buffer.length,
+              random: 'A buffer with ' + buffer.length + ' hex-characters'
+          });
+        })
+      });
+    };
+    ```
+
+Explain about JavaScripts async/await, how it relates to promises and reasons to use it compared to the plain promise API.
+
+**Async functions use an implicit Promise to return results. Even if you don't return a promise explicitly, the async function makes sure that your code is passed through a promise. await blocks the code execution within the async function, of which it ( await statement ) is a part.**
+
+Provide examples to demonstrate
+
+- Why this often is the preferred way of handling promises
+
+  The Promise way
+
+  ```
+  const getPlanetforFirstSpeciesInFirstMovieForPerson = id => {
+      const obj = {}
+
+      fetch(`https://swapi.dev/api/people/${id}`)
+          .then(res => res.json())
+          .then(data => {
+              obj.name = data.name
+          //Nested fetch as data.films returns a url
+          fetch(data.films[0])
+              .then(res => res.json())
+              .then(data => {
+              obj.firstFilm = data.title
+              //Another nested fetch to get species?
+              fetch(data.species[0])
+              .then(res=> res.json())
+              .then(data => {
+                  obj.species = data.name
+              });
+          });
+
+
+      fetch(data.homeworld)
+      .then(res => res.json())
+      .then(data => {
+          obj.homeWorld = data.name;
+              console.log(obj)
+          });
+      });
+
+
+  }
+
+  ```
+
+  The clean async way 
+
+  ```
+
+  const getPlanetforFirstSpeciesInFirstMovieForPersonAsync = async id => {
+      let person = {};
+      try {
+        const character = await fetch(
+          `https://swapi.dev/api/people/${id}`
+        )
+        .then(res => res.json());
+
+        person.name = character.name;
+
+        const film = await fetch(character.films[0]).then(res => res.json());
+
+        const homeworld = await fetch(character.homeworld).then(res => res.json());
+
+        person.firstFilm = film.title;
+
+        person.homeWorld = homeworld.name;
+
+      } catch (error) {
+        console.error(error);
+      }
+      console.log(person);
+    };
+
+
+  ```
