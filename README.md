@@ -54,3 +54,165 @@
   
   **Webpack is really useful with frontend projects because they usually contain a lot of assets. Webpack helps us maintain these assets by bundling them.**
 
+* Explain using sufficient code examples the following features in JavaScript (and node)
+
+  - Variable/function-Hoisting
+  
+    **In JavaScript, a variable can be declared after it has been used. In other words; a variable can be used before it has been declared. Hoisting is JavaScript's default behavior of moving all declarations to the top of the current scope (to the top of the current script or the current function).**
+  
+    **Variables defined with let and const are hoisted to the top of the block, but not initialized.Meaning: The block of code is aware of the variable, but it cannot be used until it has been declared.Using a let or const variable before it is declared will result in a ReferenceError.The variable is in a "temporal dead zone" from the start of the block until it is declared**
+  
+  - this in JavaScript and how it differs from what we know from Java/.net.
+  
+  **Java uses class methods we can call on the object**
+  
+  **In JavaScript ```this``` refers to the current objects executing context. Every JavaScript function has a reference to it's current execution context**
+  
+  ```
+  var person = {
+	  firstName : "Casper",
+	  lastName : "Prejler",
+	  id : 225512,
+	  fullName : function(){
+		  return this.firstName + " " + this.lastName;
+	  }
+  }
+
+  //In this case this belongs to the person object
+
+  console.log(person.fullName())
+
+
+  //We have access to the fullName function on a different object by using the call keyword
+  //
+
+  var person2 = {
+	  firstName : "John",
+	  lastName : "Hansen"
+  }
+
+
+  console.log(person.fullName.call(person2));
+  ```
+
+
+
+  - Function Closures and the JavaScript Module Pattern
+    **A closure is a feature in JavaScript where an inner function has access to the outer (enclosing) function’s variables — a scope chain.**
+
+    **The closure has three scope chains:**
+
+      - **it has access to its own scope — variables defined between its curly brackets**
+      
+      - **it has access to the outer function’s variables**
+      
+      - **it has access to the global variables**
+  
+    ```
+    var person = {
+	  firstName : "Casper",
+	  lastName : "Prejler",
+	  age : 26,
+	  setAge : function(age){
+		  this.age = age;},
+	  setName : function(firstName, lastName){
+		  this.firstName = firstName;
+		  this.lastName = lastName;},
+	  getInfo : function(){
+		  return this.firstName + " " + this.age;}
+
+    }
+  
+    person.setAge(25);
+
+    console.log(person.getInfo());
+    ```
+  
+  - User-defined Callback Functions (writing functions that take a callback)
+  
+    ```
+    function myFilter(array, callback){
+	    let filteredArray = new Array(); 
+	    array.forEach(element => filteredArray.push(callback(element)));
+	    return filteredArray;
+    }
+    ```
+  
+  - Explain the methods map, filter and reduce
+  
+      - **The map() method creates a new array with the results of calling a function for every array element.**
+      - **The filter() method creates an array filled with all array elements that pass a test (provided as a function).**
+      - **The reduce() method reduces the array to a single value by using an accumulator argument**
+  
+  - Provide examples of user-defined reusable modules implemented in Node.js (learnynode - 6)
+  
+  ```
+  const fs = require('fs');
+  const path = require('path');
+
+
+  module.exports = (dirName, fileExt, callback) => {
+	  fs.readdir(dirName, (err, files) => {
+		  if (err)
+			  return callback(err);
+		  else {
+			  list = files.filter(function(file){
+				  if(path.extname(file) ===  '.' + fileExt) return true;
+
+		  })
+		  return callback(null, list);
+	  }
+  })}
+  ```
+  
+  - Provide examples and explain the es2015 features: let, arrow functions, this, rest parameters, destructuring objects and arrays,   maps/sets etc.
+  
+  
+  - Provide an example of ES6 inheritance and reflect over the differences between Inheritance in Java and in ES6.
+  
+  - Explain and demonstrate, how to implement event-based code, how to emit events and how to listen for such events
+  
+  ```
+  const EventEmitter = require('events');
+
+  class DOS_Detector extends EventEmitter {
+     constructor(timeValue){
+       super();  //Figure out what it is you have to extend (use moshes video)
+      this.urls = new Map();
+      this.TIME_BETWEEN_CALLS = timeValue;
+    }
+    addUrl = (url) =>{
+      const time = new Date().getTime();
+      if(this.urls.has(url)){
+         const deltaTime = time - this.urls.get(url) 
+         if(deltaTime < this.TIME_BETWEEN_CALLS){
+          //Add this info to the event {url:url,timeBetweenCalls:deltaTime}
+		  this.emit('DosDetected', {url: url, timeBetweenCalls: deltaTime});
+       }
+     }
+     this.urls.set(url,time);
+   }
+  }
+
+  module.exports = DOS_Detector;
+  ```
+  
+  ```
+  const DosDetector = require('./dosDetector');
+
+  const dosDetector = new DosDetector(500);
+  dosDetector.on('DosDetected', (eventArg) =>{
+	  console.log('Listener called', eventArg);
+  });
+
+  dosDetector.addUrl('google.com')
+  setTimeout(function(){
+	dosDetector.addUrl('google.com');
+  }, 100);
+  
+  ```
+
+
+
+  
+    
